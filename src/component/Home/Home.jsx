@@ -4,10 +4,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default function Home() {
   const [items, setItems] = useState([
-    { id: '1', order: 1 },
-    { id: '2', order: 2 },
-    { id: '3', order: 3 },
-    { id: '4', order: 4 },
+    { id: '1', order: 1, color: 'lightcoral' },   
+    { id: '2', order: 2, color: 'lightblue' },   
+    { id: '3', order: 3, color: 'lightgreen' },  
+    { id: '4', order: 4, color: 'lightyellow' },  
   ]);
 
   const onDragEnd = (result) => {
@@ -25,8 +25,11 @@ export default function Home() {
     }));
 
     setItems(updatedItems);
+  };
 
-    console.log(updatedItems);
+  const getColor = (order) => {
+    const item = items.find((item) => item.order === order);
+    return item ? item.color : 'white';
   };
 
   return (
@@ -44,7 +47,13 @@ export default function Home() {
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
                       >
-                        <Card style={{ width: '18rem', margin: '0.5rem auto' }}>
+                        <Card
+                          style={{
+                            width: '18rem',
+                            margin: '0.5rem auto',
+                            backgroundColor: getColor(val.order),
+                          }}
+                        >
                           <Card.Body>
                             <Card.Title>order-{val.order}</Card.Title>
                             <Card.Text>{val.order}</Card.Text>
