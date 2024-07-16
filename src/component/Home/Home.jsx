@@ -4,10 +4,10 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default function Home() {
   const [items, setItems] = useState([
-    { id: '1', order: 5 },
-    { id: '2', order: 3 },
-    { id: '3', order: 2 },
-    { id: '5', order: 1 },
+    { id: '1', order: 1 },
+    { id: '2', order: 2 },
+    { id: '3', order: 3 },
+    { id: '4', order: 4 },
   ]);
 
   const onDragEnd = (result) => {
