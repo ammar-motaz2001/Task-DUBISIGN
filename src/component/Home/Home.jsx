@@ -4,13 +4,12 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 
 export default function Home() {
   const [items, setItems] = useState([
-    { id: '1', order: '1' },
-    { id: '2', order: '2' },
-    { id: '3', order: '3' },
-    { id: '4', order: '4' },
-    { id: '5', order: '5' },
-
+    { id: '1', order: 5 },
+    { id: '2', order: 3 },
+    { id: '3', order: 2 },
+    { id: '5', order: 1 },
   ]);
+
   const onDragEnd = (result) => {
     if (!result.destination) {
       return;
@@ -20,7 +19,14 @@ export default function Home() {
     const [removed] = newItems.splice(result.source.index, 1);
     newItems.splice(result.destination.index, 0, removed);
 
-    setItems(newItems);
+    const updatedItems = newItems.map((item, index) => ({
+      ...item,
+      order: index + 1,
+    }));
+
+    setItems(updatedItems);
+
+    console.log(updatedItems);
   };
 
   return (
@@ -40,7 +46,7 @@ export default function Home() {
                       >
                         <Card style={{ width: '18rem', margin: '0.5rem auto' }}>
                           <Card.Body>
-                            <Card.Title>order-{val.id}</Card.Title>
+                            <Card.Title>order-{val.order}</Card.Title>
                             <Card.Text>{val.order}</Card.Text>
                           </Card.Body>
                         </Card>
